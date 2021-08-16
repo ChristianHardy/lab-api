@@ -3,6 +3,7 @@ import { logger } from "../__helpers";
 import { expressRoutes } from "./routes";
 import { ExpressRoutesPool } from "./__types";
 import express, { Express } from "express";
+import cors from "cors";
 
 class Server {
 	/**
@@ -31,7 +32,10 @@ class Server {
 	 * Prepare API functions
 	 */
 	private prepare(): void {
-		// MIddleware to parse body json
+		// Middleware to enable CORS
+		this.expressInstance.use(cors());
+
+		// Middleware to parse body json
 		this.expressInstance.use(express.json());
 
 		// Create the APIs based on routes
